@@ -40,13 +40,12 @@ pipeline {
         script {
           docker.withRegistry( "" ) {
             dockerImage.push()
+             docker run -p 8080:8080 docker.build registry + ":$BUILD_NUMBER"
              }
         }
       }
     }
-      stage("Run container on Dev server"){
-        docker run -p 8080:8080 dockerImage
-      }
+    
     stage('Deploy App') {
       steps {
         script {
