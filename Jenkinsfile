@@ -13,15 +13,7 @@ pipeline {
         git 'https://github.com/syedhajirali/employee.git'
       }
     }
-
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-
+      
       stage('Maven Install') {
       agent {
         docker {
@@ -32,12 +24,23 @@ pipeline {
         sh 'mvn clean install'
       }
       }
+
+    stage('Build image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+
+      
         
     stage('Push Image') {
       steps{
         script {
           docker.withRegistry( "" ) {
             dockerImage.push()
+            docker run -p dockerImage
           }
         }
       }
