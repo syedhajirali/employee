@@ -40,8 +40,7 @@ pipeline {
         script {
           docker.withRegistry( "" ) {
             dockerImage.push()
-            docker run -p dockerImage
-          }
+             }
         }
       }
     }
