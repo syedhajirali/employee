@@ -39,8 +39,8 @@ pipeline {
       steps{
         script {
           docker.withRegistry( "" ) {
-            dockerImage.push()
-             
+            dockerImage.push dockerImage
+             sh 'docker push dockerImage'
              }
         }
       }
