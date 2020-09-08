@@ -20,7 +20,7 @@ spec:
       imagePullPolicy: IfNotPresent
       name: employee
     imagePullSecrets:
-     - name: regcred
+     - name: testsec
 
 
 ---
