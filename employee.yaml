@@ -16,7 +16,7 @@ spec:
       app: employee
    spec:
     containers:
-    - image: 10.128.0.12:5000/syedhajirali:${BUILD_NUMBER}
+    - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}
       imagePullPolicy: IfNotPresent
       name: employee
 
