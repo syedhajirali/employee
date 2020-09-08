@@ -28,7 +28,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerimage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
@@ -38,8 +38,8 @@ pipeline {
     stage('Push Docker Image') {
       steps{
         script {
-          docker.withRegistry( "" ) {
-                   sh 'docker push dockerimage'
+          docker.withRegistry( "","" ) {
+                  dockerImage.push()
              }
         }
       }
