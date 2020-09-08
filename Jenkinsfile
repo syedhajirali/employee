@@ -1,58 +1,35 @@
 pipeline {
-
   environment {
-    registry = "10.128.0.12:5000/syedhajirali/employee"   
-    dockerImage = ""
+    registry = 10.128.0.12:5000/syedhajirali/employee"
+     dockerImage = ''
   }
-
   agent any
-    stages {
-  
-    stage('Checkout Source') {
+  stages {
+    stage('Cloning Git') {
       steps {
-        git 'https://github.com/syedhajirali/employee.git'
+       git 'https://github.com/syedhajirali/employee.git'
       }
     }
-      
-      stage('Maven Install') {
-      agent {
-        docker {
-          image 'maven:3.5.0'
-        }
-      }
-      steps {
-        sh 'mvn clean install'
-      }
-      }
-
-    stage('Build image') {
+    stage('Building image') {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
-
-      
-        
-    stage('Push Docker Image') {
+    stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( "","" ) {
-                  dockerImage.push()
-             }
+          docker.withRegistry( '' ) {
+            dockerImage.push()
+          }
         }
       }
     }
-    
-    stage('Deploy App') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "employee.yaml", kubeconfigId: "mykubeconfig")
-        }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-
   }
-
 }
