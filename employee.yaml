@@ -16,11 +16,11 @@ spec:
       app: employee
    spec:
     containers:
-    - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}
-      imagePullPolicy: IfNotPresent
-      name: employee
+      - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}
+        imagePullPolicy: IfNotPresent
+        name: employee
     imagePullSecrets:
-     - name: dockersec
+      - name: dockersec
 
 
 ---
