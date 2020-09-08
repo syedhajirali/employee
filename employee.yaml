@@ -30,10 +30,10 @@ metadata:
   namespace: default
 spec:
   ports:
-  - nodePort: 31500
-    port: 8888
+  - nodePort: 30600
+    port: 9010
     protocol: TCP
-    targetPort: 8888
+    targetPort: 9010
   selector:
     app: employee
   sessionAffinity: None
