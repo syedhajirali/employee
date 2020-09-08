@@ -35,7 +35,7 @@ pipeline {
 
       
         
-    stage('Push Image') {
+    stage('Push Docker Image') {
       steps{
         script {
           docker.withRegistry( "" ) {
@@ -44,7 +44,9 @@ pipeline {
         }
       }
     }
-
+      stage("Run container on Dev server"){
+        docker run -p 8080:8080 dockerImage
+      }
     stage('Deploy App') {
       steps {
         script {
