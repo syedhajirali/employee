@@ -1,0 +1,5 @@
+FROM openjdk:8
+WORKDIR /src
+ARG JAR_FILE=/target/employee.jar
+COPY ${JAR_FILE} employee.jar
+ENTRYPOINT ["java","-jar","employee.jar"]
