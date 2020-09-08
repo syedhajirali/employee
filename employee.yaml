@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: employee
+    run: employee
+  name: employee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employee
+  template:
+   metadata:
+    labels:
+      app: employee
+   spec:
+    containers:
+    - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}
+      name: employee
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: employee
+  name: employee
+  namespace: default
+spec:
+  ports:
+  - nodePort: 31000
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: employee
+  sessionAffinity: None
+  type: NodePort
