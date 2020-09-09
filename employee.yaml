@@ -15,12 +15,10 @@ spec:
     labels:
       app: employee
    spec:
-    imagePullSecrets:
-      - name: my-registry-key
-    containers:
-      - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}
-        imagePullPolicy: IfNotPresent
-        name: employee
+     containers:
+       - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}
+         imagePullPolicy: Never
+         name: employee
 
 
 ---
