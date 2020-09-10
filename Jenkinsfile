@@ -32,7 +32,7 @@ pipeline {
      stage('Deploy App  Cluster') {
       steps {
         script {
-          kubernetesDeploy(configs: "employee.yaml", kubeconfigId: "mykubeconfig")
+               sh 'kubectl apply -f employee.yml'
         }
       }
     }
