@@ -21,14 +21,15 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '' ) {
-            dockerImage.push()
+            dockerImage.push("${env.BUILD_NUMBER}")
+              dockerImage.push("latest")
           }
         }
       }
     }
    
     
-     stage('Deploy App to Kubernetes Cluster') {
+     stage('Deploy App  Cluster') {
       steps {
         script {
           kubernetesDeploy(configs: "employee.yaml", kubeconfigId: "mykubeconfig")
