@@ -16,7 +16,7 @@ spec:
       app: employee1
    spec:
      containers:
-       - image: 10.128.0.12:5000/syedhajirali/employee:latest
+       - image: 10.128.0.12:5000/syedhajirali/employee:16
          name: employee1
      imagePullSecrets:
         - name: regcred         
