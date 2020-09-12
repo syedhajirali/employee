@@ -31,7 +31,7 @@ pipeline {
     stage('Deploy App to Kubernetes Cluster') {
       steps {
         script {
-          kubernetesDeploy(configs: "employee.yaml", kubeconfigId: "mykubeconfig")
+          kubernetesDeploy(configs: "pod.yaml", kubeconfigId: "mykubeconfig")
         }
       }
     }
