@@ -19,8 +19,7 @@ spec:
        - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}        
          name: employee1
      imagePullSecrets:
-        - name: regcred
-          imagePullPolicy: IfNotPresent
+        - name: regcred         
 
 ---
 apiVersion: v1
