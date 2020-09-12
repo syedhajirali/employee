@@ -20,20 +20,24 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( '' ) {
-            dockerImage.push("${env.BUILD_NUMBER}")
-              dockerImage.push("latest")
+          docker.withRegistry( "" ) {
+            dockerImage.push()
           }
         }
       }
     }
    
     
-     stage('Deploy App  Cluster') {
+    stage('Deploy App to Kubernetes Cluster') {
       steps {
         script {
-               sh 'kubectl apply -f employee.yml'
+          kubernetesDeploy(configs: "employee.yaml", kubeconfigId: "mykubeconfig")
         }
+      }
+    }
+	stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
   }
