@@ -16,12 +16,11 @@ spec:
       app: employee1
    spec:
      containers:
-       - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}
-         imagePullPolicy: IfNotPresent
+       - image: 10.128.0.12:5000/syedhajirali/employee:${BUILD_NUMBER}        
          name: employee1
      imagePullSecrets:
         - name: regcred
-
+          imagePullPolicy: IfNotPresent
 
 ---
 apiVersion: v1
