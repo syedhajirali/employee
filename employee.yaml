@@ -21,7 +21,6 @@ spec:
          name: employee1
      imagePullSecrets:
         - name: regcred      
-     restartPolicy: Always
 
 ---
 apiVersion: v1
