@@ -20,7 +20,8 @@ spec:
          imagePullPolicy: Always
          name: employee1
      imagePullSecrets:
-        - name: regcred         
+        - name: regcred      
+     restartPolicy: Always
 
 ---
 apiVersion: v1
