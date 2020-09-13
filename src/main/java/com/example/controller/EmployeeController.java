@@ -13,4 +13,10 @@ public class EmployeeController {
 	public String sayHello() {
 		return "sayHello syed--dsfdfdfdsfdf";
 	}
+	
+	@GetMapping("/employees")
+	public String getAllStudents() {
+		return "all Employees";
+
+	}
 }
