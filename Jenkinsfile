@@ -1,6 +1,7 @@
 pipeline {
   environment {
     registry = "10.128.0.17:5000/syedhajirali/employee"
+    registry_mysql = "10.128.0.17:5000/syedhajirali/mysql"
      dockerImage = ''
   }
   agent any
@@ -27,7 +28,19 @@ pipeline {
       }
     }
    
-    
+    stage('current') {
+      steps{
+        dir("${env.WORKSPACE}/mysql"){
+          sh "pwd"
+          }
+      }
+   }
+   stage('Build mysql image') {
+     steps{
+       sh 'docker build -t "10.128.0.12:5000/syedhajirali/mysql:$BUILD_NUMBER"  "$WORKSPACE"/mysql'
+        sh 'docker push "10.128.0.12:5000/syedhajirali/mysql:$BUILD_NUMBER"'
+        }
+      }
     stage('Deploy App to Kubernetes Cluster') {
       steps {
         script {
